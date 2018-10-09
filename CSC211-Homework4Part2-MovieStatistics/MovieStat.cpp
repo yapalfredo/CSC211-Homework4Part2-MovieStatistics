@@ -51,6 +51,9 @@ void MovieStat::questionB(const int SIZE)
 		movieArr.push_back(getInput());
 	}
 
+	cout << endl;
+	cout << endl;
+	displayVector(movieArr, SIZE);
 }
 
 void MovieStat::inputValidation(char caseChar, int& input)
@@ -75,5 +78,12 @@ void MovieStat::inputValidation(char caseChar, int& input)
 			cout << "Only positive integers are accepted. Please try again!" << endl;
 		}
 	} while (input < 0);
+}
 
+void MovieStat::displayVector(vector<int> movieArr, int SIZE)const
+{
+	for (int i = 0; i < SIZE; i++)
+	{
+		cout << movieArr.at(i) << " ";
+	}
 }

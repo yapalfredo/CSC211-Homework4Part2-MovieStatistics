@@ -37,9 +37,12 @@ public:
 	MODE OF THE VALUES ENTERED.
 	*/	void questionC();
 	
-	
 	//INPUT VALIDATION
 	void inputValidation(char, int&);
 
+	//DOES NOTHING ALMOST
+	//ONLY TO LOAD THE FIRST QUESTION
 	void loadScreen();
+
+	void displayVector( vector<int>, int) const;
 };

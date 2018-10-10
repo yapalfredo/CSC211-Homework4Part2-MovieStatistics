@@ -34,12 +34,9 @@ public:
 	/*
 	ALLOW THE USER TO ENTER THE NUMBER OF MOVIES
 	EACH STUDENT SAW INTO THE ARRAY.
-	*/	void questionB(const int);
-
-	/*
 	CALCULATE AND DISPLAY THE AVERAGE, MEDIAN, AND
 	MODE OF THE VALUES ENTERED.
-	*/	void questionC();
+	*/	void questionBandC(const int);
 	
 	//INPUT VALIDATION
 	void inputValidation(char, int&);
@@ -52,5 +49,9 @@ public:
 	void displayVector( vector<int>);
 
 	//DISPLAYS THE MODE IN THE ARRAY
-	void displayMode(vector<int>) const;			
+	void displayMode(vector<int>);
+
+	//A FUNCTION FOR CHECKING THE TEMP ARRAY IF A VALUE
+	//HAS ALREADY BEEN COUNTED
+	bool ifExists(const vector<int>, int);
 };

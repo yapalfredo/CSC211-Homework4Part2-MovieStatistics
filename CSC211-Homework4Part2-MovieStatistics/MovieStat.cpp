@@ -45,10 +45,10 @@ void MovieStat::questionA()
 	const int SIZE = getInput();
 
 	cout << endl << endl;
-	questionB(SIZE);
+	questionBandC(SIZE);
 }
 
-void MovieStat::questionB(const int SIZE)
+void MovieStat::questionBandC(const int SIZE)
 {
 	//FOR DYNAMIC ALLOCATION	
 	vector<int> movieArr;
@@ -65,7 +65,9 @@ void MovieStat::questionB(const int SIZE)
 	displayVector(movieArr);
 	cout << endl << endl << "The average of the array is: " << getAverage(movieArr.size()) << endl << endl;
 	cout << "The median of the array is: " << getMedian(movieArr) << endl << endl;
-	cout << "The mode in the array is: ";
+
+	cout << "The mode in the array is: " << endl << endl;
+	displayMode(movieArr);
 }
 
 void MovieStat::inputValidation(char caseChar, int& input)
@@ -130,15 +132,73 @@ double MovieStat::getMedian(vector<int> movieArr) const
 		result = (double)(movieArr.at(medianSize) + movieArr.at(medianSize - 1))/2;
 	}
 	else if (movieArr.size() % 2 == 1)
-	{
-		result = movieArr.at(medianSize);
+	{	
 	//ELSE, JUST GET THE MIDDLE ELEMENT
+		result = movieArr.at(medianSize);
 	}
 
 	return result;
 }
 
-void MovieStat::displayMode(vector<int> movieArr) const
+void MovieStat::displayMode(vector<int> movieArr)
 {
+	//THIS FUNCTION WILL LOOK FOR MODE IN THE ARRAY
 
+	vector<int> tempMovieArr = movieArr;
+
+	int counter = 0;
+
+	for (int i = 0; i < tempMovieArr.size(); i++)
+	{
+		for (int j = 0; j < tempMovieArr.size(); j++)
+		{
+			if (tempMovieArr.at(i) == tempMovieArr.at(j))
+			{
+				counter++;
+			}
+		}
+		if (!ifExists(tempMovieArr, movieArr.at(i) - 1))
+		{
+			tempMovieArr.at(movieArr.at(i) - 1) = counter;
+		}
+		counter = 0;
+	}
+	cout << endl;
+
+	//////////////////////////////////////////////////////////////
+	//DISPLAY THE OCCURENCE OF EACH GENERATED VALUE IN THE ARRAY
+	for (int i = 0; i < tempMovieArr.size(); i++)
+	{
+		if (tempMovieArr.at(i) > 0)
+		{
+			cout << i + 1 << " occured " << tempMovieArr.at(i);
+
+			if (tempMovieArr.at(i) > 1)
+			{
+				cout << " times" << endl;
+			}
+			else
+			{
+				cout << " time " << endl;
+			}
+		}
+	}
+
+}
+
+bool MovieStat::ifExists(const vector<int> tempMovieArr, int val)
+{
+	//THIS FUNCTION WILL RETURN TRUE IF THE NUMBER HAS ALREADY BEEN COUNTED
+	//OR FALSE OTHERWISE
+	bool result = false;
+
+	if (tempMovieArr.at(val) <= 0)
+	{
+		result = false;
+	}
+	else
+	{
+		result = true;
+	}
+	return result;
 }

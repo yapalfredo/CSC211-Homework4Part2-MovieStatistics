@@ -8,7 +8,7 @@ using namespace std;
 class MovieStat
 {
 private:
-	int input;
+	int input, sum;
 public:
 	//CONSTRUCTOR
 	MovieStat();
@@ -16,12 +16,14 @@ public:
 	~MovieStat();
 
 	//GETTERS
-	int getInput();		//GETS INPUT
-	double getAverage(vector<int>) const;	//CALCULATES AVERAGE
-	double getMedian(vector<int>) const; //CALCULATES MEDIAN
+	int getInput() const;	//GETS INPUT
+	double getAverage(int) const;	// CALCULATES ANR RETURNS THE AVERAGE
+	double getMedian(vector<int>) const;	//CALCULATES MEDIAN
+	int getSum() const;
 
-	//SETTER
+	//SETTERS
 	void setInput(int);
+	void setSum(int);
 
 	/*
 	ASK THE USER HOW MANY STUDENTS WERE SURVEYED.
@@ -46,5 +48,9 @@ public:
 	//ONLY TO LOAD THE FIRST QUESTION
 	void loadScreen();
 
-	void displayVector( vector<int>) const;
+	//DISPLAYS ALL THE ELEMENTS IN THE ARRAY
+	void displayVector( vector<int>);
+
+	//DISPLAYS THE MODE IN THE ARRAY
+	void displayMode(vector<int>) const;			
 };

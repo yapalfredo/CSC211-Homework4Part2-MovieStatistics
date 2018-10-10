@@ -15,9 +15,19 @@ void MovieStat::setInput(int input)
 	this->input = input;
 }
 
-int MovieStat::getInput()
+int MovieStat::getInput() const
 {
 	return input;
+}
+
+void MovieStat::setSum(int sum)
+{
+	this -> sum = sum;
+}
+
+int MovieStat::getSum() const
+{
+	return sum;
 }
 
 void MovieStat::loadScreen() 
@@ -53,8 +63,9 @@ void MovieStat::questionB(const int SIZE)
 	cout << endl;
 	cout << endl;
 	displayVector(movieArr);
-	cout << endl << endl << "The average of the array is: " << getAverage(movieArr) << endl << endl;
-	cout << "The median of the array is: " << getMedian(movieArr) << endl;
+	cout << endl << endl << "The average of the array is: " << getAverage(movieArr.size()) << endl << endl;
+	cout << "The median of the array is: " << getMedian(movieArr) << endl << endl;
+	cout << "The mode in the array is: ";
 }
 
 void MovieStat::inputValidation(char caseChar, int& input)
@@ -83,27 +94,27 @@ void MovieStat::inputValidation(char caseChar, int& input)
 	} while (input < 0);
 }
 
-void MovieStat::displayVector(vector<int> movieArr)const
+void MovieStat::displayVector(vector<int> movieArr)
 {
 	//THIS FUNCTION DISPLAY THE VALUES IN THE ARRAY
+
+	int sum = 0;	//THIS VARIABLE WILL HOLD
+					//THE SUM OF THE ARRAY
+
 	cout << "Your array of inputs are: ";
 	for (int i = 0; i < movieArr.size(); i++)
 	{
 		cout << movieArr.at(i) << " ";
+		sum += movieArr.at(i);
 	}
+
+	setSum(sum);
 }
 
-double MovieStat::getAverage(vector<int> movieArr) const
+double MovieStat::getAverage(int SIZE) const
 {
 	//THIS FUNCTION CALCULATES THE AVERAGE VALUE OF THE ARRAY
-	double result = 0;
-
-	for (int i = 0; i < movieArr.size(); i++)
-	{
-		result += movieArr.at(i);
-	}
-
-	return (result / (double)movieArr.size());
+	return ((double)getSum() / (double)SIZE);
 }
 
 double MovieStat::getMedian(vector<int> movieArr) const
@@ -125,4 +136,9 @@ double MovieStat::getMedian(vector<int> movieArr) const
 	}
 
 	return result;
+}
+
+void MovieStat::displayMode(vector<int> movieArr) const
+{
+
 }

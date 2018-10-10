@@ -15,8 +15,10 @@ public:
 	//DESTRUCTOR
 	~MovieStat();
 
-	//GETTER
-	int getInput();
+	//GETTERS
+	int getInput();		//GETS INPUT
+	double getAverage(vector<int>) const;	//CALCULATES AVERAGE
+	double getMedian(vector<int>) const; //CALCULATES MEDIAN
 
 	//SETTER
 	void setInput(int);
@@ -44,5 +46,5 @@ public:
 	//ONLY TO LOAD THE FIRST QUESTION
 	void loadScreen();
 
-	void displayVector( vector<int>, int) const;
+	void displayVector( vector<int>) const;
 };

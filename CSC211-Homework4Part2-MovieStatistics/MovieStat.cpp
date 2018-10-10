@@ -3,6 +3,8 @@
 MovieStat::MovieStat()
 {
 	//CONSTRUCTOR
+	
+	setMax(0);
 }
 
 MovieStat::~MovieStat()
@@ -12,22 +14,65 @@ MovieStat::~MovieStat()
 
 void MovieStat::setInput(int input)
 {
+	//THIS FUNCTION SETS THE INPUT 
+	//VARIABLE FROM THE USER
 	this->input = input;
 }
 
 int MovieStat::getInput() const
 {
+	//THIS FUNCTION RETURNS THE INPUT
+	//TO THE USER
 	return input;
 }
 
 void MovieStat::setSum(int sum)
 {
+	//THIS FUNCTION SETS THE SUM
+	//VARIABLE FROM THE ARRAY
 	this -> sum = sum;
 }
 
 int MovieStat::getSum() const
 {
+	//THIS FUNCTION RETURNS THE SUM
+	//VARIABLE VALUE FROM THE ARRAY
 	return sum;
+}
+
+void MovieStat::setMax(int max) {
+	//THIS FUNCTIONS SETS THE MAX
+	//VARIABLE. THIS COULD BE INITIALIZED
+	//OR BE CALLED WHILE LOOKING FOR THE
+	//LARGEST VALUE IN THE ARRAY
+	this->max = max;
+}
+
+void MovieStat::setMax(vector<int> movieArr)
+{
+	//THIS FUNCTION WILL SET THE MAX VARIABLE VALUE
+	//DEPENDING ON THE LARGEST VALUE OF THE ELEMENT
+	//IN THE ARRAY
+	for (int i = 0; i < movieArr.size(); i++)
+	{
+		for (int j = 0; j < movieArr.size(); j++)
+		{
+			if (movieArr.at(i) > movieArr.at(j) && movieArr.at(i) > max)
+			{
+				setMax(movieArr.at(i));
+			}
+			else if (movieArr.at(i) < movieArr.at(j) && movieArr.at(j) > max)
+			{
+				setMax(movieArr.at(j));
+			}
+		}
+	}
+}
+
+int MovieStat::getMax() const
+{
+	//RETURNS THE MAX VARIABLE VALUE
+	return max;
 }
 
 void MovieStat::loadScreen() 
@@ -60,14 +105,12 @@ void MovieStat::questionBandC(const int SIZE)
 		movieArr.push_back(getInput());
 	}
 
-	cout << endl;
-	cout << endl;
+	cout << endl << endl;
 	displayVector(movieArr);
 	cout << endl << endl << "The average of the array is: " << getAverage(movieArr.size()) << endl << endl;
 	cout << "The median of the array is: " << getMedian(movieArr) << endl << endl;
-
-	cout << "The mode in the array is: " << endl << endl;
-	displayMode(movieArr);
+	setMax(movieArr);
+	displayMode(movieArr); cout << endl;
 }
 
 void MovieStat::inputValidation(char caseChar, int& input)
@@ -142,29 +185,27 @@ double MovieStat::getMedian(vector<int> movieArr) const
 
 void MovieStat::displayMode(vector<int> movieArr)
 {
-	//THIS FUNCTION WILL LOOK FOR MODE IN THE ARRAY
-
-	vector<int> tempMovieArr = movieArr;
+	//THIS FUNCTION WILL LOOK FOR AND DISPLAY THE MODE IN THE ARRAY
+	vector<int> tempMovieArr(getMax(), 0);
 
 	int counter = 0;
 
-	for (int i = 0; i < tempMovieArr.size(); i++)
+	for (int i = 0; i < movieArr.size(); i++)
 	{
-		for (int j = 0; j < tempMovieArr.size(); j++)
+		for (int j = 0; j < movieArr.size(); j++)
 		{
-			if (tempMovieArr.at(i) == tempMovieArr.at(j))
+			if (movieArr.at(i) == movieArr.at(j))
 			{
 				counter++;
-			}
+			}			
 		}
 		if (!ifExists(tempMovieArr, movieArr.at(i) - 1))
 		{
-			tempMovieArr.at(movieArr.at(i) - 1) = counter;
+		tempMovieArr.at(movieArr.at(i) - 1) = counter;
 		}
 		counter = 0;
 	}
 	cout << endl;
-
 	//////////////////////////////////////////////////////////////
 	//DISPLAY THE OCCURENCE OF EACH GENERATED VALUE IN THE ARRAY
 	for (int i = 0; i < tempMovieArr.size(); i++)
@@ -183,7 +224,30 @@ void MovieStat::displayMode(vector<int> movieArr)
 			}
 		}
 	}
+	//////////////////////////////////////////////////////////////
+	//SET MODE(S)
+	cout << endl << "The mode(s) is/are: " << endl;
+	bool greaterOrEqual;
+	for (int i = 0; i < tempMovieArr.size(); i++)
+	{
+		greaterOrEqual = true;
 
+		for (int j = 0; j < tempMovieArr.size(); j++)
+		{
+			ifGreaterOrEqual(tempMovieArr.at(i), tempMovieArr.at(j), greaterOrEqual);
+		}
+
+		if (!greaterOrEqual)
+		{
+			tempMovieArr.at(i) = 0;	//SET TO ZERO IF IT'S NOT A MODE
+		}
+
+		if (tempMovieArr.at(i) > 1) //WILL ONLY DISPLAY OCCURENCE GREATER THAN 1
+		{
+			cout << i + 1 << "    ";
+		}
+	}
+	////////////////////////////////////////////////////////////////
 }
 
 bool MovieStat::ifExists(const vector<int> tempMovieArr, int val)
@@ -201,4 +265,23 @@ bool MovieStat::ifExists(const vector<int> tempMovieArr, int val)
 		result = true;
 	}
 	return result;
+}
+
+bool MovieStat::ifGreaterOrEqual(const int a, const int b, bool &greaterOrEqual)
+{
+	//THIS FUNCTION WILL BE USED TO DETERMINE THE MODE(S)
+	//IT HAS 3 ARGUMENTS, BOTH INTS WILL BE COMPARED, THEN
+	//SETS THE BOOL VARIABLE TO 'MULTIPLY EQUALS' DEPENDING
+	//RESULT OF THE CONDITION. THEN IT WILL RETURN THAT BOOL
+	//VARIABLE
+	if (a >= b)
+	{
+		greaterOrEqual *= true;
+	}
+	else
+	{
+		greaterOrEqual *= false;
+	}
+
+	return greaterOrEqual;
 }

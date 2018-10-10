@@ -7,7 +7,15 @@ int main()
 
 	MovieStat mv;
 
-	mv.loadScreen();
+	try
+	{
+		mv.loadScreen();
+	}
+	catch (const std::exception& e)
+	{
+		cout << e.what();
+	}
+	
 
 	system("Pause");
 	return 0;

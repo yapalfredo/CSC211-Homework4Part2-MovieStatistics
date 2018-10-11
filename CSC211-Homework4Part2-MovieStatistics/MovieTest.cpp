@@ -1,7 +1,5 @@
 #include "MovieStat.h"
 
-
-
 int main()
 {
 
@@ -16,7 +14,6 @@ int main()
 		cout << e.what();
 	}
 	
-
 	system("Pause");
 	return 0;
 }

@@ -89,7 +89,7 @@ void MovieStat::questionA()
 	setInput(input);
 	const int SIZE = getInput();
 
-	cout << endl << endl;
+	cout << endl;
 	questionBandC(SIZE);
 }
 
@@ -105,12 +105,15 @@ void MovieStat::questionBandC(const int SIZE)
 		movieArr.push_back(getInput());
 	}
 
-	cout << endl << endl;
+	cout << endl;
 	displayVector(movieArr);
 	cout << endl << endl << "The average of the array is: " << getAverage(movieArr.size()) << endl << endl;
-	cout << "The median of the array is: " << getMedian(movieArr) << endl << endl;
+	cout << "The median of the array is: " << getMedian(movieArr) << endl ;
 	setMax(movieArr);
 	displayMode(movieArr); cout << endl;
+
+	movieArr.clear();
+	movieArr.resize(0);
 }
 
 void MovieStat::inputValidation(char caseChar, int& input)
@@ -248,6 +251,8 @@ void MovieStat::displayMode(vector<int> movieArr)
 		}
 	}
 	////////////////////////////////////////////////////////////////
+	tempMovieArr.clear();
+	tempMovieArr.resize(0);
 }
 
 bool MovieStat::ifExists(const vector<int> tempMovieArr, int val)

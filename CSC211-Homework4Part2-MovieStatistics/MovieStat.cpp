@@ -135,11 +135,11 @@ void MovieStat::inputValidation(char caseChar, int& input)
 			break;
 		}
 		
-		if (input < 0)
+		if (input <= 0)
 		{
 			cout << "Only positive integers are accepted. Please try again!" << endl;
 		}
-	} while (input < 0);
+	} while (input <= 0);
 }
 
 void MovieStat::displayVector(vector<int> movieArr)
@@ -251,6 +251,7 @@ void MovieStat::displayMode(vector<int> movieArr)
 		}
 	}
 	////////////////////////////////////////////////////////////////
+	cout << endl;
 	tempMovieArr.clear();
 	tempMovieArr.resize(0);
 }
